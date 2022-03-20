@@ -1,742 +1,807 @@
 from dataclasses import dataclass
 
 from performance import Performance
-from statistics_full import StatisticsFull
 
 
 @dataclass()
 class PreResult:
-    id: int
-    home_accurateCrosses: float
-    home_accurateFinalThirdPassesAgainst: float
-    home_accurateLongBalls: float
-    home_accurateOppositionHalfPasses: float
-    home_accurateOppositionHalfPassesAgainst: float
-    home_accurateOwnHalfPasses: float
-    home_accurateOwnHalfPassesAgainst: float
-    home_accuratePasses: float
-    home_accuratePassesAgainst: float
-    home_aerialDuelsWon: float
-    home_assists: float
-    home_averageBallPossession: float
-    home_avgRating: float
-    home_bigChances: float
-    home_bigChancesAgainst: float
-    home_bigChancesCreated: float
-    home_bigChancesCreatedAgainst: float
-    home_bigChancesMissed: float
-    home_bigChancesMissedAgainst: float
-    home_cleanSheets: float
-    home_clearances: float
-    home_clearancesAgainst: float
-    home_clearancesOffLine: float
-    home_corners: float
-    home_cornersAgainst: float
-    home_crossesSuccessfulAgainst: float
-    home_crossesTotalAgainst: float
-    home_dribbleAttempts: float
-    home_dribbleAttemptsTotalAgainst: float
-    home_dribbleAttemptsWonAgainst: float
-    home_duelsWon: float
-    home_errorsLeadingToGoal: float
-    home_errorsLeadingToGoalAgainst: float
-    home_errorsLeadingToShot: float
-    home_errorsLeadingToShotAgainst: float
-    home_fastBreakGoals: float
-    home_fastBreakShots: float
-    home_fastBreaks: float
-    home_fouls: float
-    home_freeKickGoals: float
-    home_freeKickShots: float
-    home_goalsConceded: float
-    home_goalsFromInsideTheBox: float
-    home_goalsFromOutsideTheBox: float
-    home_goalsScored: float
-    home_groundDuelsWon: float
-    home_headedGoals: float
-    home_hitWoodwork: float
-    home_hitWoodworkAgainst: float
-    home_interceptions: float
-    home_interceptionsAgainst: float
-    home_keyPassesAgainst: float
-    home_lastManTackles: float
-    home_leftFootGoals: float
-    home_longBallsSuccessfulAgainst: float
-    home_longBallsTotalAgainst: float
-    home_matches: float
-    home_offsides: float
-    home_offsidesAgainst: float
-    home_oppositionHalfPassesTotalAgainst: float
-    home_ownGoals: float
-    home_ownHalfPassesTotalAgainst: float
-    home_penaltiesCommited: float
-    home_penaltiesTaken: float
-    home_penaltyGoals: float
-    home_penaltyGoalsConceded: float
-    home_possessionLost: float
-    home_redCards: float
-    home_redCardsAgainst: float
-    home_rightFootGoals: float
-    home_saves: float
-    home_shots: float
-    home_shotsAgainst: float
-    home_shotsBlockedAgainst: float
-    home_shotsFromInsideTheBox: float
-    home_shotsFromInsideTheBoxAgainst: float
-    home_shotsFromOutsideTheBox: float
-    home_shotsFromOutsideTheBoxAgainst: float
-    home_shotsOffTarget: float
-    home_shotsOffTargetAgainst: float
-    home_shotsOnTarget: float
-    home_shotsOnTargetAgainst: float
-    home_successfulDribbles: float
-    home_tackles: float
-    home_tacklesAgainst: float
-    home_totalAerialDuels: float
-    home_totalCrosses: float
-    home_totalDuels: float
-    home_totalFinalThirdPassesAgainst: float
-    home_totalGroundDuels: float
-    home_totalLongBalls: float
-    home_totalOppositionHalfPasses: float
-    home_totalOwnHalfPasses: float
-    home_totalPasses: float
-    home_totalPassesAgainst: float
-    home_yellowCards: float
-    home_yellowCardsAgainst: float
-    home_yellowRedCards: float
-    away_accurateCrosses: float
-    away_accurateFinalThirdPassesAgainst: float
-    away_accurateLongBalls: float
-    away_accurateOppositionHalfPasses: float
-    away_accurateOppositionHalfPassesAgainst: float
-    away_accurateOwnHalfPasses: float
-    away_accurateOwnHalfPassesAgainst: float
-    away_accuratePasses: float
-    away_accuratePassesAgainst: float
-    away_aerialDuelsWon: float
-    away_assists: float
-    away_averageBallPossession: float
-    away_avgRating: float
-    away_bigChances: float
-    away_bigChancesAgainst: float
-    away_bigChancesCreated: float
-    away_bigChancesCreatedAgainst: float
-    away_bigChancesMissed: float
-    away_bigChancesMissedAgainst: float
-    away_cleanSheets: float
-    away_clearances: float
-    away_clearancesAgainst: float
-    away_clearancesOffLine: float
-    away_corners: float
-    away_cornersAgainst: float
-    away_crossesSuccessfulAgainst: float
-    away_crossesTotalAgainst: float
-    away_dribbleAttempts: float
-    away_dribbleAttemptsTotalAgainst: float
-    away_dribbleAttemptsWonAgainst: float
-    away_duelsWon: float
-    away_errorsLeadingToGoal: float
-    away_errorsLeadingToGoalAgainst: float
-    away_errorsLeadingToShot: float
-    away_errorsLeadingToShotAgainst: float
-    away_fastBreakGoals: float
-    away_fastBreakShots: float
-    away_fastBreaks: float
-    away_fouls: float
-    away_freeKickGoals: float
-    away_freeKickShots: float
-    away_goalsConceded: float
-    away_goalsFromInsideTheBox: float
-    away_goalsFromOutsideTheBox: float
-    away_goalsScored: float
-    away_groundDuelsWon: float
-    away_headedGoals: float
-    away_hitWoodwork: float
-    away_hitWoodworkAgainst: float
-    away_interceptions: float
-    away_interceptionsAgainst: float
-    away_keyPassesAgainst: float
-    away_lastManTackles: float
-    away_leftFootGoals: float
-    away_longBallsSuccessfulAgainst: float
-    away_longBallsTotalAgainst: float
-    away_matches: float
-    away_offsides: float
-    away_offsidesAgainst: float
-    away_oppositionHalfPassesTotalAgainst: float
-    away_ownGoals: float
-    away_ownHalfPassesTotalAgainst: float
-    away_penaltiesCommited: float
-    away_penaltiesTaken: float
-    away_penaltyGoals: float
-    away_penaltyGoalsConceded: float
-    away_possessionLost: float
-    away_redCards: float
-    away_redCardsAgainst: float
-    away_rightFootGoals: float
-    away_saves: float
-    away_shots: float
-    away_shotsAgainst: float
-    away_shotsBlockedAgainst: float
-    away_shotsFromInsideTheBox: float
-    away_shotsFromInsideTheBoxAgainst: float
-    away_shotsFromOutsideTheBox: float
-    away_shotsFromOutsideTheBoxAgainst: float
-    away_shotsOffTarget: float
-    away_shotsOffTargetAgainst: float
-    away_shotsOnTarget: float
-    away_shotsOnTargetAgainst: float
-    away_successfulDribbles: float
-    away_tackles: float
-    away_tacklesAgainst: float
-    away_totalAerialDuels: float
-    away_totalCrosses: float
-    away_totalDuels: float
-    away_totalFinalThirdPassesAgainst: float
-    away_totalGroundDuels: float
-    away_totalLongBalls: float
-    away_totalOppositionHalfPasses: float
-    away_totalOwnHalfPasses: float
-    away_totalPasses: float
-    away_totalPassesAgainst: float
-    away_yellowCards: float
-    away_yellowCardsAgainst: float
-    away_yellowRedCards: float
-    home_last_goals: int
-    home_last_goals_against: int
-    home_last_possession: int
-    home_last_totalShots: int
-    home_last_shotsOnTarget: int
-    home_last_blockedShots: int
-    home_last_fouls: int
-    home_last_yellowCard: int
-    home_last_redCard: int
-    home_last_bigChances: int
-    home_last_bigChancesMissed: int
-    home_last_shotsInsideTheBox: int
-    home_last_shotsOutsideTheBox: int
-    home_last_goalkeeperSaves: int
-    home_last_offside: int
-    home_last_totalPasses: int
-    home_last_accuratePasses: int
-    home_last_totalLongBalls: int
-    home_last_accurateLongBalls: int
-    home_last_totalCrosses: int
-    home_last_accurateCrosses: int
-    home_last_totalDribles: int
-    home_last_accurateDribles: int
-    home_last_duelsWon: int
-    home_last_aerialDuelsWon: int
-    home_last_tackles: int
-    home_last_interceptions: int
-    home_last_clearances: int
-    home_last_cornerKicks: int
-    home_last_possession_against: int
-    home_last_totalShots_against: int
-    home_last_shotsOnTarget_against: int
-    home_last_blockedShots_against: int
-    home_last_fouls_against: int
-    home_last_yellowCard_against: int
-    home_last_redCard_against: int
-    home_last_bigChances_against: int
-    home_last_bigChancesMissed_against: int
-    home_last_shotsInsideTheBox_against: int
-    home_last_shotsOutsideTheBox_against: int
-    home_last_goalkeeperSaves_against: int
-    home_last_offside_against: int
-    home_last_totalPasses_against: int
-    home_last_accuratePasses_against: int
-    home_last_totalLongBalls_against: int
-    home_last_accurateLongBalls_against: int
-    home_last_totalCrosses_against: int
-    home_last_accurateCrosses_against: int
-    home_last_totalDribles_against: int
-    home_last_accurateDribles_against: int
-    home_last_duelsWon_against: int
-    home_last_aerialDuelsWon_against: int
-    home_last_tackles_against: int
-    home_last_interceptions_against: int
-    home_last_clearances_against: int
-    home_last_cornerKicks_against: int
-    away_last_goals: int
-    away_last_goals_against: int
-    away_last_possession: int
-    away_last_totalShots: int
-    away_last_shotsOnTarget: int
-    away_last_blockedShots: int
-    away_last_fouls: int
-    away_last_yellowCard: int
-    away_last_redCard: int
-    away_last_bigChances: int
-    away_last_bigChancesMissed: int
-    away_last_shotsInsideTheBox: int
-    away_last_shotsOutsideTheBox: int
-    away_last_goalkeeperSaves: int
-    away_last_offside: int
-    away_last_totalPasses: int
-    away_last_accuratePasses: int
-    away_last_totalLongBalls: int
-    away_last_accurateLongBalls: int
-    away_last_totalCrosses: int
-    away_last_accurateCrosses: int
-    away_last_totalDribles: int
-    away_last_accurateDribles: int
-    away_last_duelsWon: int
-    away_last_aerialDuelsWon: int
-    away_last_tackles: int
-    away_last_interceptions: int
-    away_last_clearances: int
-    away_last_cornerKicks: int
-    away_last_possession_against: int
-    away_last_totalShots_against: int
-    away_last_shotsOnTarget_against: int
-    away_last_blockedShots_against: int
-    away_last_fouls_against: int
-    away_last_yellowCard_against: int
-    away_last_redCard_against: int
-    away_last_bigChances_against: int
-    away_last_bigChancesMissed_against: int
-    away_last_shotsInsideTheBox_against: int
-    away_last_shotsOutsideTheBox_against: int
-    away_last_goalkeeperSaves_against: int
-    away_last_offside_against: int
-    away_last_totalPasses_against: int
-    away_last_accuratePasses_against: int
-    away_last_totalLongBalls_against: int
-    away_last_accurateLongBalls_against: int
-    away_last_totalCrosses_against: int
-    away_last_accurateCrosses_against: int
-    away_last_totalDribles_against: int
-    away_last_accurateDribles_against: int
-    away_last_duelsWon_against: int
-    away_last_aerialDuelsWon_against: int
-    away_last_tackles_against: int
-    away_last_interceptions_against: int
-    away_last_clearances_against: int
-    away_last_cornerKicks_against: int
-    home_head_goals: int
-    home_head_possession: int
-    home_head_totalShots: int
-    home_head_shotsOnTarget: int
-    home_head_blockedShots: int
-    home_head_fouls: int
-    home_head_yellowCard: int
-    home_head_redCard: int
-    home_head_bigChances: int
-    home_head_bigChancesMissed: int
-    home_head_shotsInsideTheBox: int
-    home_head_shotsOutsideTheBox: int
-    home_head_goalkeeperSaves: int
-    home_head_offside: int
-    home_head_totalPasses: int
-    home_head_accuratePasses: int
-    home_head_totalLongBalls: int
-    home_head_accurateLongBalls: int
-    home_head_totalCrosses: int
-    home_head_accurateCrosses: int
-    home_head_totalDribles: int
-    home_head_accurateDribles: int
-    home_head_duelsWon: int
-    home_head_aerialDuelsWon: int
-    home_head_tackles: int
-    home_head_interceptions: int
-    home_head_clearances: int
-    home_head_cornerKicks: int
-    away_head_goals: int
-    away_head_possession: int
-    away_head_totalShots: int
-    away_head_shotsOnTarget: int
-    away_head_blockedShots: int
-    away_head_fouls: int
-    away_head_yellowCard: int
-    away_head_redCard: int
-    away_head_bigChances: int
-    away_head_bigChancesMissed: int
-    away_head_shotsInsideTheBox: int
-    away_head_shotsOutsideTheBox: int
-    away_head_goalkeeperSaves: int
-    away_head_offside: int
-    away_head_totalPasses: int
-    away_head_accuratePasses: int
-    away_head_totalLongBalls: int
-    away_head_accurateLongBalls: int
-    away_head_totalCrosses: int
-    away_head_accurateCrosses: int
-    away_head_totalDribles: int
-    away_head_accurateDribles: int
-    away_head_duelsWon: int
-    away_head_aerialDuelsWon: int
-    away_head_tackles: int
-    away_head_interceptions: int
-    away_head_clearances: int
-    away_head_cornerKicks: int
+    id: int = 0
+    home_accurateCrosses: float = 0.0
+    home_accurateFinalThirdPassesAgainst: float = 0.0
+    home_accurateLongBalls: float = 0.0
+    home_accurateOppositionHalfPasses: float = 0.0
+    home_accurateOppositionHalfPassesAgainst: float = 0.0
+    home_accurateOwnHalfPasses: float = 0.0
+    home_accurateOwnHalfPassesAgainst: float = 0.0
+    home_accuratePasses: float = 0.0
+    home_accuratePassesAgainst: float = 0.0
+    home_aerialDuelsWon: float = 0.0
+    home_assists: float = 0.0
+    home_averageBallPossession: float = 0.0
+    home_avgRating: float = 0.0
+    home_bigChances: float = 0.0
+    home_bigChancesAgainst: float = 0.0
+    home_bigChancesCreated: float = 0.0
+    home_bigChancesCreatedAgainst: float = 0.0
+    home_bigChancesMissed: float = 0.0
+    home_bigChancesMissedAgainst: float = 0.0
+    home_cleanSheets: float = 0.0
+    home_clearances: float = 0.0
+    home_clearancesAgainst: float = 0.0
+    home_clearancesOffLine: float = 0.0
+    home_corners: float = 0.0
+    home_cornersAgainst: float = 0.0
+    home_crossesSuccessfulAgainst: float = 0.0
+    home_crossesTotalAgainst: float = 0.0
+    home_dribbleAttempts: float = 0.0
+    home_dribbleAttemptsTotalAgainst: float = 0.0
+    home_dribbleAttemptsWonAgainst: float = 0.0
+    home_duelsWon: float = 0.0
+    home_errorsLeadingToGoal: float = 0.0
+    home_errorsLeadingToGoalAgainst: float = 0.0
+    home_errorsLeadingToShot: float = 0.0
+    home_errorsLeadingToShotAgainst: float = 0.0
+    home_fastBreakGoals: float = 0.0
+    home_fastBreakShots: float = 0.0
+    home_fastBreaks: float = 0.0
+    home_fouls: float = 0.0
+    home_freeKickGoals: float = 0.0
+    home_freeKickShots: float = 0.0
+    home_goalsConceded: float = 0.0
+    home_goalsFromInsideTheBox: float = 0.0
+    home_goalsFromOutsideTheBox: float = 0.0
+    home_goalsScored: float = 0.0
+    home_groundDuelsWon: float = 0.0
+    home_headedGoals: float = 0.0
+    home_hitWoodwork: float = 0.0
+    home_hitWoodworkAgainst: float = 0.0
+    home_interceptions: float = 0.0
+    home_interceptionsAgainst: float = 0.0
+    home_keyPassesAgainst: float = 0.0
+    home_lastManTackles: float = 0.0
+    home_leftFootGoals: float = 0.0
+    home_longBallsSuccessfulAgainst: float = 0.0
+    home_longBallsTotalAgainst: float = 0.0
+    home_matches: float = 0.0
+    home_offsides: float = 0.0
+    home_offsidesAgainst: float = 0.0
+    home_oppositionHalfPassesTotalAgainst: float = 0.0
+    home_ownGoals: float = 0.0
+    home_ownHalfPassesTotalAgainst: float = 0.0
+    home_penaltiesCommited: float = 0.0
+    home_penaltiesTaken: float = 0.0
+    home_penaltyGoals: float = 0.0
+    home_penaltyGoalsConceded: float = 0.0
+    home_possessionLost: float = 0.0
+    home_redCards: float = 0.0
+    home_redCardsAgainst: float = 0.0
+    home_rightFootGoals: float = 0.0
+    home_saves: float = 0.0
+    home_shots: float = 0.0
+    home_shotsAgainst: float = 0.0
+    home_shotsBlockedAgainst: float = 0.0
+    home_shotsFromInsideTheBox: float = 0.0
+    home_shotsFromInsideTheBoxAgainst: float = 0.0
+    home_shotsFromOutsideTheBox: float = 0.0
+    home_shotsFromOutsideTheBoxAgainst: float = 0.0
+    home_shotsOffTarget: float = 0.0
+    home_shotsOffTargetAgainst: float = 0.0
+    home_shotsOnTarget: float = 0.0
+    home_shotsOnTargetAgainst: float = 0.0
+    home_successfulDribbles: float = 0.0
+    home_tackles: float = 0.0
+    home_tacklesAgainst: float = 0.0
+    home_totalAerialDuels: float = 0.0
+    home_totalCrosses: float = 0.0
+    home_totalDuels: float = 0.0
+    home_totalFinalThirdPassesAgainst: float = 0.0
+    home_totalGroundDuels: float = 0.0
+    home_totalLongBalls: float = 0.0
+    home_totalOppositionHalfPasses: float = 0.0
+    home_totalOwnHalfPasses: float = 0.0
+    home_totalPasses: float = 0.0
+    home_totalPassesAgainst: float = 0.0
+    home_yellowCards: float = 0.0
+    home_yellowCardsAgainst: float = 0.0
+    home_yellowRedCards: float = 0.0
+    away_accurateCrosses: float = 0.0
+    away_accurateFinalThirdPassesAgainst: float = 0.0
+    away_accurateLongBalls: float = 0.0
+    away_accurateOppositionHalfPasses: float = 0.0
+    away_accurateOppositionHalfPassesAgainst: float = 0.0
+    away_accurateOwnHalfPasses: float = 0.0
+    away_accurateOwnHalfPassesAgainst: float = 0.0
+    away_accuratePasses: float = 0.0
+    away_accuratePassesAgainst: float = 0.0
+    away_aerialDuelsWon: float = 0.0
+    away_assists: float = 0.0
+    away_averageBallPossession: float = 0.0
+    away_avgRating: float = 0.0
+    away_bigChances: float = 0.0
+    away_bigChancesAgainst: float = 0.0
+    away_bigChancesCreated: float = 0.0
+    away_bigChancesCreatedAgainst: float = 0.0
+    away_bigChancesMissed: float = 0.0
+    away_bigChancesMissedAgainst: float = 0.0
+    away_cleanSheets: float = 0.0
+    away_clearances: float = 0.0
+    away_clearancesAgainst: float = 0.0
+    away_clearancesOffLine: float = 0.0
+    away_corners: float = 0.0
+    away_cornersAgainst: float = 0.0
+    away_crossesSuccessfulAgainst: float = 0.0
+    away_crossesTotalAgainst: float = 0.0
+    away_dribbleAttempts: float = 0.0
+    away_dribbleAttemptsTotalAgainst: float = 0.0
+    away_dribbleAttemptsWonAgainst: float = 0.0
+    away_duelsWon: float = 0.0
+    away_errorsLeadingToGoal: float = 0.0
+    away_errorsLeadingToGoalAgainst: float = 0.0
+    away_errorsLeadingToShot: float = 0.0
+    away_errorsLeadingToShotAgainst: float = 0.0
+    away_fastBreakGoals: float = 0.0
+    away_fastBreakShots: float = 0.0
+    away_fastBreaks: float = 0.0
+    away_fouls: float = 0.0
+    away_freeKickGoals: float = 0.0
+    away_freeKickShots: float = 0.0
+    away_goalsConceded: float = 0.0
+    away_goalsFromInsideTheBox: float = 0.0
+    away_goalsFromOutsideTheBox: float = 0.0
+    away_goalsScored: float = 0.0
+    away_groundDuelsWon: float = 0.0
+    away_headedGoals: float = 0.0
+    away_hitWoodwork: float = 0.0
+    away_hitWoodworkAgainst: float = 0.0
+    away_interceptions: float = 0.0
+    away_interceptionsAgainst: float = 0.0
+    away_keyPassesAgainst: float = 0.0
+    away_lastManTackles: float = 0.0
+    away_leftFootGoals: float = 0.0
+    away_longBallsSuccessfulAgainst: float = 0.0
+    away_longBallsTotalAgainst: float = 0.0
+    away_matches: float = 0.0
+    away_offsides: float = 0.0
+    away_offsidesAgainst: float = 0.0
+    away_oppositionHalfPassesTotalAgainst: float = 0.0
+    away_ownGoals: float = 0.0
+    away_ownHalfPassesTotalAgainst: float = 0.0
+    away_penaltiesCommited: float = 0.0
+    away_penaltiesTaken: float = 0.0
+    away_penaltyGoals: float = 0.0
+    away_penaltyGoalsConceded: float = 0.0
+    away_possessionLost: float = 0.0
+    away_redCards: float = 0.0
+    away_redCardsAgainst: float = 0.0
+    away_rightFootGoals: float = 0.0
+    away_saves: float = 0.0
+    away_shots: float = 0.0
+    away_shotsAgainst: float = 0.0
+    away_shotsBlockedAgainst: float = 0.0
+    away_shotsFromInsideTheBox: float = 0.0
+    away_shotsFromInsideTheBoxAgainst: float = 0.0
+    away_shotsFromOutsideTheBox: float = 0.0
+    away_shotsFromOutsideTheBoxAgainst: float = 0.0
+    away_shotsOffTarget: float = 0.0
+    away_shotsOffTargetAgainst: float = 0.0
+    away_shotsOnTarget: float = 0.0
+    away_shotsOnTargetAgainst: float = 0.0
+    away_successfulDribbles: float = 0.0
+    away_tackles: float = 0.0
+    away_tacklesAgainst: float = 0.0
+    away_totalAerialDuels: float = 0.0
+    away_totalCrosses: float = 0.0
+    away_totalDuels: float = 0.0
+    away_totalFinalThirdPassesAgainst: float = 0.0
+    away_totalGroundDuels: float = 0.0
+    away_totalLongBalls: float = 0.0
+    away_totalOppositionHalfPasses: float = 0.0
+    away_totalOwnHalfPasses: float = 0.0
+    away_totalPasses: float = 0.0
+    away_totalPassesAgainst: float = 0.0
+    away_yellowCards: float = 0.0
+    away_yellowCardsAgainst: float = 0.0
+    away_yellowRedCards: float = 0.0
 
-    def __init__(self, match_id, home: Performance, away: Performance,
-                 homeLast: StatisticsFull, awayLast: StatisticsFull,
-                 homeHead: StatisticsFull, awayHead: StatisticsFull):
-        self.id = match_id
-        self.home_accurateCrosses = home.accurateCrosses
-        self.home_accurateFinalThirdPassesAgainst = home.accurateFinalThirdPassesAgainst
-        self.home_accurateLongBalls = home.accurateLongBalls
-        self.home_accurateOppositionHalfPasses = home.accurateOppositionHalfPasses
-        self.home_accurateOppositionHalfPassesAgainst = home.accurateOppositionHalfPassesAgainst
-        self.home_accurateOwnHalfPasses = home.accurateOwnHalfPasses
-        self.home_accurateOwnHalfPassesAgainst = home.accurateOwnHalfPassesAgainst
-        self.home_accuratePasses = home.accuratePasses
-        self.home_accuratePassesAgainst = home.accuratePassesAgainst
-        self.home_aerialDuelsWon = home.aerialDuelsWon
-        self.home_assists = home.assists
-        self.home_averageBallPossession = home.averageBallPossession
-        self.home_avgRating = home.avgRating
-        self.home_bigChances = home.bigChances
-        self.home_bigChancesAgainst = home.bigChancesAgainst
-        self.home_bigChancesCreated = home.bigChancesCreated
-        self.home_bigChancesCreatedAgainst = home.bigChancesCreatedAgainst
-        self.home_bigChancesMissed = home.bigChancesMissed
-        self.home_bigChancesMissedAgainst = home.bigChancesMissedAgainst
-        self.home_cleanSheets = home.cleanSheets
-        self.home_clearances = home.clearances
-        self.home_clearancesAgainst = home.clearancesAgainst
-        self.home_clearancesOffLine = home.clearancesOffLine
-        self.home_corners = home.corners
-        self.home_cornersAgainst = home.cornersAgainst
-        self.home_crossesSuccessfulAgainst = home.crossesSuccessfulAgainst
-        self.home_crossesTotalAgainst = home.crossesTotalAgainst
-        self.home_dribbleAttempts = home.dribbleAttempts
-        self.home_dribbleAttemptsTotalAgainst = home.dribbleAttemptsTotalAgainst
-        self.home_dribbleAttemptsWonAgainst = home.dribbleAttemptsWonAgainst
-        self.home_duelsWon = home.duelsWon
-        self.home_errorsLeadingToGoal = home.errorsLeadingToGoal
-        self.home_errorsLeadingToGoalAgainst = home.errorsLeadingToGoalAgainst
-        self.home_errorsLeadingToShot = home.errorsLeadingToShot
-        self.home_errorsLeadingToShotAgainst = home.errorsLeadingToShotAgainst
-        self.home_fastBreakGoals = home.fastBreakGoals
-        self.home_fastBreakShots = home.fastBreakShots
-        self.home_fastBreaks = home.fastBreaks
-        self.home_fouls = home.fouls
-        self.home_freeKickGoals = home.freeKickGoals
-        self.home_freeKickShots = home.freeKickShots
-        self.home_goalsConceded = home.goalsConceded
-        self.home_goalsFromInsideTheBox = home.goalsFromInsideTheBox
-        self.home_goalsFromOutsideTheBox = home.goalsFromOutsideTheBox
-        self.home_goalsScored = home.goalsScored
-        self.home_groundDuelsWon = home.groundDuelsWon
-        self.home_headedGoals = home.headedGoals
-        self.home_hitWoodwork = home.hitWoodwork
-        self.home_hitWoodworkAgainst = home.hitWoodworkAgainst
-        self.home_erceptions = home.interceptions
-        self.home_erceptionsAgainst = home.interceptionsAgainst
-        self.home_keyPassesAgainst = home.keyPassesAgainst
-        self.home_lastManTackles = home.lastManTackles
-        self.home_leftFootGoals = home.leftFootGoals
-        self.home_longBallsSuccessfulAgainst = home.longBallsSuccessfulAgainst
-        self.home_longBallsTotalAgainst = home.longBallsTotalAgainst
-        self.home_matches = home.matches
-        self.home_offsides = home.offsides
-        self.home_offsidesAgainst = home.offsidesAgainst
-        self.home_oppositionHalfPassesTotalAgainst = home.oppositionHalfPassesTotalAgainst
-        self.home_ownGoals = home.ownGoals
-        self.home_ownHalfPassesTotalAgainst = home.ownHalfPassesTotalAgainst
-        self.home_penaltiesCommited = home.penaltiesCommited
-        self.home_penaltiesTaken = home.penaltiesTaken
-        self.home_penaltyGoals = home.penaltyGoals
-        self.home_penaltyGoalsConceded = home.penaltyGoalsConceded
-        self.home_possessionLost = home.possessionLost
-        self.home_redCards = home.redCards
-        self.home_redCardsAgainst = home.redCardsAgainst
-        self.home_rightFootGoals = home.rightFootGoals
-        self.home_saves = home.saves
-        self.home_shots = home.shots
-        self.home_shotsAgainst = home.shotsAgainst
-        self.home_shotsBlockedAgainst = home.shotsBlockedAgainst
-        self.home_shotsFromInsideTheBox = home.shotsFromInsideTheBox
-        self.home_shotsFromInsideTheBoxAgainst = home.shotsFromInsideTheBoxAgainst
-        self.home_shotsFromOutsideTheBox = home.shotsFromOutsideTheBox
-        self.home_shotsFromOutsideTheBoxAgainst = home.shotsFromOutsideTheBoxAgainst
-        self.home_shotsOffTarget = home.shotsOffTarget
-        self.home_shotsOffTargetAgainst = home.shotsOffTargetAgainst
-        self.home_shotsOnTarget = home.shotsOnTarget
-        self.home_shotsOnTargetAgainst = home.shotsOnTargetAgainst
-        self.home_successfulDribbles = home.successfulDribbles
-        self.home_tackles = home.tackles
-        self.home_tacklesAgainst = home.tacklesAgainst
-        self.home_totalAerialDuels = home.totalAerialDuels
-        self.home_totalCrosses = home.totalCrosses
-        self.home_totalDuels = home.totalDuels
-        self.home_totalFinalThirdPassesAgainst = home.totalFinalThirdPassesAgainst
-        self.home_totalGroundDuels = home.totalGroundDuels
-        self.home_totalLongBalls = home.totalLongBalls
-        self.home_totalOppositionHalfPasses = home.totalOppositionHalfPasses
-        self.home_totalOwnHalfPasses = home.totalOwnHalfPasses
-        self.home_totalPasses = home.totalPasses
-        self.home_totalPassesAgainst = home.totalPassesAgainst
-        self.home_yellowCards = home.yellowCards
-        self.home_yellowCardsAgainst = home.yellowCardsAgainst
-        self.home_yellowRedCards = home.yellowRedCards
-        self.away_accurateCrosses = away.accurateCrosses
-        self.away_accurateFinalThirdPassesAgainst = away.accurateFinalThirdPassesAgainst
-        self.away_accurateLongBalls = away.accurateLongBalls
-        self.away_accurateOppositionHalfPasses = away.accurateOppositionHalfPasses
-        self.away_accurateOppositionHalfPassesAgainst = away.accurateOppositionHalfPassesAgainst
-        self.away_accurateOwnHalfPasses = away.accurateOwnHalfPasses
-        self.away_accurateOwnHalfPassesAgainst = away.accurateOwnHalfPassesAgainst
-        self.away_accuratePasses = away.accuratePasses
-        self.away_accuratePassesAgainst = away.accuratePassesAgainst
-        self.away_aerialDuelsWon = away.aerialDuelsWon
-        self.away_assists = away.assists
-        self.away_averageBallPossession = away.averageBallPossession
-        self.away_avgRating = away.avgRating
-        self.away_bigChances = away.bigChances
-        self.away_bigChancesAgainst = away.bigChancesAgainst
-        self.away_bigChancesCreated = away.bigChancesCreated
-        self.away_bigChancesCreatedAgainst = away.bigChancesCreatedAgainst
-        self.away_bigChancesMissed = away.bigChancesMissed
-        self.away_bigChancesMissedAgainst = away.bigChancesMissedAgainst
-        self.away_cleanSheets = away.cleanSheets
-        self.away_clearances = away.clearances
-        self.away_clearancesAgainst = away.clearancesAgainst
-        self.away_clearancesOffLine = away.clearancesOffLine
-        self.away_corners = away.corners
-        self.away_cornersAgainst = away.cornersAgainst
-        self.away_crossesSuccessfulAgainst = away.crossesSuccessfulAgainst
-        self.away_crossesTotalAgainst = away.crossesTotalAgainst
-        self.away_dribbleAttempts = away.dribbleAttempts
-        self.away_dribbleAttemptsTotalAgainst = away.dribbleAttemptsTotalAgainst
-        self.away_dribbleAttemptsWonAgainst = away.dribbleAttemptsWonAgainst
-        self.away_duelsWon = away.duelsWon
-        self.away_errorsLeadingToGoal = away.errorsLeadingToGoal
-        self.away_errorsLeadingToGoalAgainst = away.errorsLeadingToGoalAgainst
-        self.away_errorsLeadingToShot = away.errorsLeadingToShot
-        self.away_errorsLeadingToShotAgainst = away.errorsLeadingToShotAgainst
-        self.away_fastBreakGoals = away.fastBreakGoals
-        self.away_fastBreakShots = away.fastBreakShots
-        self.away_fastBreaks = away.fastBreaks
-        self.away_fouls = away.fouls
-        self.away_freeKickGoals = away.freeKickGoals
-        self.away_freeKickShots = away.freeKickShots
-        self.away_goalsConceded = away.goalsConceded
-        self.away_goalsFromInsideTheBox = away.goalsFromInsideTheBox
-        self.away_goalsFromOutsideTheBox = away.goalsFromOutsideTheBox
-        self.away_goalsScored = away.goalsScored
-        self.away_groundDuelsWon = away.groundDuelsWon
-        self.away_headedGoals = away.headedGoals
-        self.away_hitWoodwork = away.hitWoodwork
-        self.away_hitWoodworkAgainst = away.hitWoodworkAgainst
-        self.away_erceptions = away.interceptions
-        self.away_erceptionsAgainst = away.interceptionsAgainst
-        self.away_keyPassesAgainst = away.keyPassesAgainst
-        self.away_lastManTackles = away.lastManTackles
-        self.away_leftFootGoals = away.leftFootGoals
-        self.away_longBallsSuccessfulAgainst = away.longBallsSuccessfulAgainst
-        self.away_longBallsTotalAgainst = away.longBallsTotalAgainst
-        self.away_matches = away.matches
-        self.away_offsides = away.offsides
-        self.away_offsidesAgainst = away.offsidesAgainst
-        self.away_oppositionHalfPassesTotalAgainst = away.oppositionHalfPassesTotalAgainst
-        self.away_ownGoals = away.ownGoals
-        self.away_ownHalfPassesTotalAgainst = away.ownHalfPassesTotalAgainst
-        self.away_penaltiesCommited = away.penaltiesCommited
-        self.away_penaltiesTaken = away.penaltiesTaken
-        self.away_penaltyGoals = away.penaltyGoals
-        self.away_penaltyGoalsConceded = away.penaltyGoalsConceded
-        self.away_possessionLost = away.possessionLost
-        self.away_redCards = away.redCards
-        self.away_redCardsAgainst = away.redCardsAgainst
-        self.away_rightFootGoals = away.rightFootGoals
-        self.away_saves = away.saves
-        self.away_shots = away.shots
-        self.away_shotsAgainst = away.shotsAgainst
-        self.away_shotsBlockedAgainst = away.shotsBlockedAgainst
-        self.away_shotsFromInsideTheBox = away.shotsFromInsideTheBox
-        self.away_shotsFromInsideTheBoxAgainst = away.shotsFromInsideTheBoxAgainst
-        self.away_shotsFromOutsideTheBox = away.shotsFromOutsideTheBox
-        self.away_shotsFromOutsideTheBoxAgainst = away.shotsFromOutsideTheBoxAgainst
-        self.away_shotsOffTarget = away.shotsOffTarget
-        self.away_shotsOffTargetAgainst = away.shotsOffTargetAgainst
-        self.away_shotsOnTarget = away.shotsOnTarget
-        self.away_shotsOnTargetAgainst = away.shotsOnTargetAgainst
-        self.away_successfulDribbles = away.successfulDribbles
-        self.away_tackles = away.tackles
-        self.away_tacklesAgainst = away.tacklesAgainst
-        self.away_totalAerialDuels = away.totalAerialDuels
-        self.away_totalCrosses = away.totalCrosses
-        self.away_totalDuels = away.totalDuels
-        self.away_totalFinalThirdPassesAgainst = away.totalFinalThirdPassesAgainst
-        self.away_totalGroundDuels = away.totalGroundDuels
-        self.away_totalLongBalls = away.totalLongBalls
-        self.away_totalOppositionHalfPasses = away.totalOppositionHalfPasses
-        self.away_totalOwnHalfPasses = away.totalOwnHalfPasses
-        self.away_totalPasses = away.totalPasses
-        self.away_totalPassesAgainst = away.totalPassesAgainst
-        self.away_yellowCards = away.yellowCards
-        self.away_yellowCardsAgainst = away.yellowCardsAgainst
-        self.away_yellowRedCards = away.yellowRedCards
-        self.home_last_goals = homeLast.goals
-        self.home_last_goals_against = homeLast.goals_against
-        self.home_last_possession = homeLast.possession
-        self.home_last_totalShots = homeLast.totalShots
-        self.home_last_shotsOnTarget = homeLast.shotsOnTarget
-        self.home_last_blockedShots = homeLast.blockedShots
-        self.home_last_fouls = homeLast.fouls
-        self.home_last_yellowCard = homeLast.yellowCard
-        self.home_last_redCard = homeLast.redCard
-        self.home_last_bigChances = homeLast.bigChances
-        self.home_last_bigChancesMissed = homeLast.bigChancesMissed
-        self.home_last_shotsInsideTheBox = homeLast.shotsInsideTheBox
-        self.home_last_shotsOutsideTheBox = homeLast.shotsOutsideTheBox
-        self.home_last_goalkeeperSaves = homeLast.goalkeeperSaves
-        self.home_last_offside = homeLast.offside
-        self.home_last_totalPasses = homeLast.totalPasses
-        self.home_last_accuratePasses = homeLast.accuratePasses
-        self.home_last_totalLongBalls = homeLast.totalLongBalls
-        self.home_last_accurateLongBalls = homeLast.accurateLongBalls
-        self.home_last_totalCrosses = homeLast.totalCrosses
-        self.home_last_accurateCrosses = homeLast.accurateCrosses
-        self.home_last_totalDribles = homeLast.totalDribles
-        self.home_last_accurateDribles = homeLast.accurateDribles
-        self.home_last_duelsWon = homeLast.duelsWon
-        self.home_last_aerialDuelsWon = homeLast.aerialDuelsWon
-        self.home_last_tackles = homeLast.tackles
-        self.home_last_erceptions = homeLast.interceptions
-        self.home_last_clearances = homeLast.clearances
-        self.home_last_cornerKicks = homeLast.cornerKicks
-        self.home_last_possession_against = homeLast.possession_against
-        self.home_last_totalShots_against = homeLast.totalShots_against
-        self.home_last_shotsOnTarget_against = homeLast.shotsOnTarget_against
-        self.home_last_blockedShots_against = homeLast.blockedShots_against
-        self.home_last_fouls_against = homeLast.fouls_against
-        self.home_last_yellowCard_against = homeLast.yellowCard_against
-        self.home_last_redCard_against = homeLast.redCard_against
-        self.home_last_bigChances_against = homeLast.bigChances_against
-        self.home_last_bigChancesMissed_against = homeLast.bigChancesMissed_against
-        self.home_last_shotsInsideTheBox_against = homeLast.shotsInsideTheBox_against
-        self.home_last_shotsOutsideTheBox_against = homeLast.shotsOutsideTheBox_against
-        self.home_last_goalkeeperSaves_against = homeLast.goalkeeperSaves_against
-        self.home_last_offside_against = homeLast.offside_against
-        self.home_last_totalPasses_against = homeLast.totalPasses_against
-        self.home_last_accuratePasses_against = homeLast.accuratePasses_against
-        self.home_last_totalLongBalls_against = homeLast.totalLongBalls_against
-        self.home_last_accurateLongBalls_against = homeLast.accurateLongBalls_against
-        self.home_last_totalCrosses_against = homeLast.totalCrosses_against
-        self.home_last_accurateCrosses_against = homeLast.accurateCrosses_against
-        self.home_last_totalDribles_against = homeLast.totalDribles_against
-        self.home_last_accurateDribles_against = homeLast.accurateDribles_against
-        self.home_last_duelsWon_against = homeLast.duelsWon_against
-        self.home_last_aerialDuelsWon_against = homeLast.aerialDuelsWon_against
-        self.home_last_tackles_against = homeLast.tackles_against
-        self.home_last_erceptions_against = homeLast.interceptions_against
-        self.home_last_clearances_against = homeLast.clearances_against
-        self.home_last_cornerKicks_against = homeLast.cornerKicks_against
-        self.away_last_goals = awayLast.goals
-        self.away_last_goals_against = awayLast.goals_against
-        self.away_last_possession = awayLast.possession
-        self.away_last_totalShots = awayLast.totalShots
-        self.away_last_shotsOnTarget = awayLast.shotsOnTarget
-        self.away_last_blockedShots = awayLast.blockedShots
-        self.away_last_fouls = awayLast.fouls
-        self.away_last_yellowCard = awayLast.yellowCard
-        self.away_last_redCard = awayLast.redCard
-        self.away_last_bigChances = awayLast.bigChances
-        self.away_last_bigChancesMissed = awayLast.bigChancesMissed
-        self.away_last_shotsInsideTheBox = awayLast.shotsInsideTheBox
-        self.away_last_shotsOutsideTheBox = awayLast.shotsOutsideTheBox
-        self.away_last_goalkeeperSaves = awayLast.goalkeeperSaves
-        self.away_last_offside = awayLast.offside
-        self.away_last_totalPasses = awayLast.totalPasses
-        self.away_last_accuratePasses = awayLast.accuratePasses
-        self.away_last_totalLongBalls = awayLast.totalLongBalls
-        self.away_last_accurateLongBalls = awayLast.accurateLongBalls
-        self.away_last_totalCrosses = awayLast.totalCrosses
-        self.away_last_accurateCrosses = awayLast.accurateCrosses
-        self.away_last_totalDribles = awayLast.totalDribles
-        self.away_last_accurateDribles = awayLast.accurateDribles
-        self.away_last_duelsWon = awayLast.duelsWon
-        self.away_last_aerialDuelsWon = awayLast.aerialDuelsWon
-        self.away_last_tackles = awayLast.tackles
-        self.away_last_erceptions = awayLast.interceptions
-        self.away_last_clearances = awayLast.clearances
-        self.away_last_cornerKicks = awayLast.cornerKicks
-        self.away_last_possession_against = awayLast.possession_against
-        self.away_last_totalShots_against = awayLast.totalShots_against
-        self.away_last_shotsOnTarget_against = awayLast.shotsOnTarget_against
-        self.away_last_blockedShots_against = awayLast.blockedShots_against
-        self.away_last_fouls_against = awayLast.fouls_against
-        self.away_last_yellowCard_against = awayLast.yellowCard_against
-        self.away_last_redCard_against = awayLast.redCard_against
-        self.away_last_bigChances_against = awayLast.bigChances_against
-        self.away_last_bigChancesMissed_against = awayLast.bigChancesMissed_against
-        self.away_last_shotsInsideTheBox_against = awayLast.shotsInsideTheBox_against
-        self.away_last_shotsOutsideTheBox_against = awayLast.shotsOutsideTheBox_against
-        self.away_last_goalkeeperSaves_against = awayLast.goalkeeperSaves_against
-        self.away_last_offside_against = awayLast.offside_against
-        self.away_last_totalPasses_against = awayLast.totalPasses_against
-        self.away_last_accuratePasses_against = awayLast.accuratePasses_against
-        self.away_last_totalLongBalls_against = awayLast.totalLongBalls_against
-        self.away_last_accurateLongBalls_against = awayLast.accurateLongBalls_against
-        self.away_last_totalCrosses_against = awayLast.totalCrosses_against
-        self.away_last_accurateCrosses_against = awayLast.accurateCrosses_against
-        self.away_last_totalDribles_against = awayLast.totalDribles_against
-        self.away_last_accurateDribles_against = awayLast.accurateDribles_against
-        self.away_last_duelsWon_against = awayLast.duelsWon_against
-        self.away_last_aerialDuelsWon_against = awayLast.aerialDuelsWon_against
-        self.away_last_tackles_against = awayLast.tackles_against
-        self.away_last_erceptions_against = awayLast.interceptions_against
-        self.away_last_clearances_against = awayLast.clearances_against
-        self.away_last_cornerKicks_against = awayLast.cornerKicks_against
-        self.home_head_goals = homeHead.goals
-        self.home_head_possession = homeHead.possession
-        self.home_head_totalShots = homeHead.totalShots
-        self.home_head_shotsOnTarget = homeHead.shotsOnTarget
-        self.home_head_blockedShots = homeHead.blockedShots
-        self.home_head_fouls = homeHead.fouls
-        self.home_head_yellowCard = homeHead.yellowCard
-        self.home_head_redCard = homeHead.redCard
-        self.home_head_bigChances = homeHead.bigChances
-        self.home_head_bigChancesMissed = homeHead.bigChancesMissed
-        self.home_head_shotsInsideTheBox = homeHead.shotsInsideTheBox
-        self.home_head_shotsOutsideTheBox = homeHead.shotsOutsideTheBox
-        self.home_head_goalkeeperSaves = homeHead.goalkeeperSaves
-        self.home_head_offside = homeHead.offside
-        self.home_head_totalPasses = homeHead.totalPasses
-        self.home_head_accuratePasses = homeHead.accuratePasses
-        self.home_head_totalLongBalls = homeHead.totalLongBalls
-        self.home_head_accurateLongBalls = homeHead.accurateLongBalls
-        self.home_head_totalCrosses = homeHead.totalCrosses
-        self.home_head_accurateCrosses = homeHead.accurateCrosses
-        self.home_head_totalDribles = homeHead.totalDribles
-        self.home_head_accurateDribles = homeHead.accurateDribles
-        self.home_head_duelsWon = homeHead.duelsWon
-        self.home_head_aerialDuelsWon = homeHead.aerialDuelsWon
-        self.home_head_tackles = homeHead.tackles
-        self.home_head_erceptions = homeHead.interceptions
-        self.home_head_clearances = homeHead.clearances
-        self.home_head_cornerKicks = homeHead.cornerKicks
-        self.away_head_goals = awayHead.goals
-        self.away_head_possession = awayHead.possession
-        self.away_head_totalShots = awayHead.totalShots
-        self.away_head_shotsOnTarget = awayHead.shotsOnTarget
-        self.away_head_blockedShots = awayHead.blockedShots
-        self.away_head_fouls = awayHead.fouls
-        self.away_head_yellowCard = awayHead.yellowCard
-        self.away_head_redCard = awayHead.redCard
-        self.away_head_bigChances = awayHead.bigChances
-        self.away_head_bigChancesMissed = awayHead.bigChancesMissed
-        self.away_head_shotsInsideTheBox = awayHead.shotsInsideTheBox
-        self.away_head_shotsOutsideTheBox = awayHead.shotsOutsideTheBox
-        self.away_head_goalkeeperSaves = awayHead.goalkeeperSaves
-        self.away_head_offside = awayHead.offside
-        self.away_head_totalPasses = awayHead.totalPasses
-        self.away_head_accuratePasses = awayHead.accuratePasses
-        self.away_head_totalLongBalls = awayHead.totalLongBalls
-        self.away_head_accurateLongBalls = awayHead.accurateLongBalls
-        self.away_head_totalCrosses = awayHead.totalCrosses
-        self.away_head_accurateCrosses = awayHead.accurateCrosses
-        self.away_head_totalDribles = awayHead.totalDribles
-        self.away_head_accurateDribles = awayHead.accurateDribles
-        self.away_head_duelsWon = awayHead.duelsWon
-        self.away_head_aerialDuelsWon = awayHead.aerialDuelsWon
-        self.away_head_tackles = awayHead.tackles
-        self.away_head_erceptions = awayHead.interceptions
-        self.away_head_clearances = awayHead.clearances
-        self.away_head_cornerKicks = awayHead.cornerKicks
+
+    def __init__(self, id: int = 0, home_accurateCrosses=0.0,
+    home_accurateFinalThirdPassesAgainst=0.0,
+    home_accurateLongBalls=0.0,
+    home_accurateOppositionHalfPasses=0.0,
+    home_accurateOppositionHalfPassesAgainst=0.0,
+    home_accurateOwnHalfPasses=0.0,
+    home_accurateOwnHalfPassesAgainst=0.0,
+    home_accuratePasses=0.0,
+    home_accuratePassesAgainst=0.0,
+    home_aerialDuelsWon=0.0,
+    home_assists=0.0,
+    home_averageBallPossession=0.0,
+    home_avgRating=0.0,
+    home_bigChances=0.0,
+    home_bigChancesAgainst=0.0,
+    home_bigChancesCreated=0.0,
+    home_bigChancesCreatedAgainst=0.0,
+    home_bigChancesMissed=0.0,
+    home_bigChancesMissedAgainst=0.0,
+    home_cleanSheets=0.0,
+    home_clearances=0.0,
+    home_clearancesAgainst=0.0,
+    home_clearancesOffLine=0.0,
+    home_corners=0.0,
+    home_cornersAgainst=0.0,
+    home_crossesSuccessfulAgainst=0.0,
+    home_crossesTotalAgainst=0.0,
+    home_dribbleAttempts=0.0,
+    home_dribbleAttemptsTotalAgainst=0.0,
+    home_dribbleAttemptsWonAgainst=0.0,
+    home_duelsWon=0.0,
+    home_errorsLeadingToGoal=0.0,
+    home_errorsLeadingToGoalAgainst=0.0,
+    home_errorsLeadingToShot=0.0,
+    home_errorsLeadingToShotAgainst=0.0,
+    home_fastBreakGoals=0.0,
+    home_fastBreakShots=0.0,
+    home_fastBreaks=0.0,
+    home_fouls=0.0,
+    home_freeKickGoals=0.0,
+    home_freeKickShots=0.0,
+    home_goalsConceded=0.0,
+    home_goalsFromInsideTheBox=0.0,
+    home_goalsFromOutsideTheBox=0.0,
+    home_goalsScored=0.0,
+    home_groundDuelsWon=0.0,
+    home_headedGoals=0.0,
+    home_hitWoodwork=0.0,
+    home_hitWoodworkAgainst=0.0,
+    home_interceptions=0.0,
+    home_interceptionsAgainst=0.0,
+    home_keyPassesAgainst=0.0,
+    home_lastManTackles=0.0,
+    home_leftFootGoals=0.0,
+    home_longBallsSuccessfulAgainst=0.0,
+    home_longBallsTotalAgainst=0.0,
+    home_matches=0.0,
+    home_offsides=0.0,
+    home_offsidesAgainst=0.0,
+    home_oppositionHalfPassesTotalAgainst=0.0,
+    home_ownGoals=0.0,
+    home_ownHalfPassesTotalAgainst=0.0,
+    home_penaltiesCommited=0.0,
+    home_penaltiesTaken=0.0,
+    home_penaltyGoals=0.0,
+    home_penaltyGoalsConceded=0.0,
+    home_possessionLost=0.0,
+    home_redCards=0.0,
+    home_redCardsAgainst=0.0,
+    home_rightFootGoals=0.0,
+    home_saves=0.0,
+    home_shots=0.0,
+    home_shotsAgainst=0.0,
+    home_shotsBlockedAgainst=0.0,
+    home_shotsFromInsideTheBox=0.0,
+    home_shotsFromInsideTheBoxAgainst=0.0,
+    home_shotsFromOutsideTheBox=0.0,
+    home_shotsFromOutsideTheBoxAgainst=0.0,
+    home_shotsOffTarget=0.0,
+    home_shotsOffTargetAgainst=0.0,
+    home_shotsOnTarget=0.0,
+    home_shotsOnTargetAgainst=0.0,
+    home_successfulDribbles=0.0,
+    home_tackles=0.0,
+    home_tacklesAgainst=0.0,
+    home_totalAerialDuels=0.0,
+    home_totalCrosses=0.0,
+    home_totalDuels=0.0,
+    home_totalFinalThirdPassesAgainst=0.0,
+    home_totalGroundDuels=0.0,
+    home_totalLongBalls=0.0,
+    home_totalOppositionHalfPasses=0.0,
+    home_totalOwnHalfPasses=0.0,
+    home_totalPasses=0.0,
+    home_totalPassesAgainst=0.0,
+    home_yellowCards=0.0,
+    home_yellowCardsAgainst=0.0,
+    home_yellowRedCards=0.0,
+    away_accurateCrosses=0.0,
+    away_accurateFinalThirdPassesAgainst=0.0,
+    away_accurateLongBalls=0.0,
+    away_accurateOppositionHalfPasses=0.0,
+    away_accurateOppositionHalfPassesAgainst=0.0,
+    away_accurateOwnHalfPasses=0.0,
+    away_accurateOwnHalfPassesAgainst=0.0,
+    away_accuratePasses=0.0,
+    away_accuratePassesAgainst=0.0,
+    away_aerialDuelsWon=0.0,
+    away_assists=0.0,
+    away_averageBallPossession=0.0,
+    away_avgRating=0.0,
+    away_bigChances=0.0,
+    away_bigChancesAgainst=0.0,
+    away_bigChancesCreated=0.0,
+    away_bigChancesCreatedAgainst=0.0,
+    away_bigChancesMissed=0.0,
+    away_bigChancesMissedAgainst=0.0,
+    away_cleanSheets=0.0,
+    away_clearances=0.0,
+    away_clearancesAgainst=0.0,
+    away_clearancesOffLine=0.0,
+    away_corners=0.0,
+    away_cornersAgainst=0.0,
+    away_crossesSuccessfulAgainst=0.0,
+    away_crossesTotalAgainst=0.0,
+    away_dribbleAttempts=0.0,
+    away_dribbleAttemptsTotalAgainst=0.0,
+    away_dribbleAttemptsWonAgainst=0.0,
+    away_duelsWon=0.0,
+    away_errorsLeadingToGoal=0.0,
+    away_errorsLeadingToGoalAgainst=0.0,
+    away_errorsLeadingToShot=0.0,
+    away_errorsLeadingToShotAgainst=0.0,
+    away_fastBreakGoals=0.0,
+    away_fastBreakShots=0.0,
+    away_fastBreaks=0.0,
+    away_fouls=0.0,
+    away_freeKickGoals=0.0,
+    away_freeKickShots=0.0,
+    away_goalsConceded=0.0,
+    away_goalsFromInsideTheBox=0.0,
+    away_goalsFromOutsideTheBox=0.0,
+    away_goalsScored=0.0,
+    away_groundDuelsWon=0.0,
+    away_headedGoals=0.0,
+    away_hitWoodwork=0.0,
+    away_hitWoodworkAgainst=0.0,
+    away_interceptions=0.0,
+    away_interceptionsAgainst=0.0,
+    away_keyPassesAgainst=0.0,
+    away_lastManTackles=0.0,
+    away_leftFootGoals=0.0,
+    away_longBallsSuccessfulAgainst=0.0,
+    away_longBallsTotalAgainst=0.0,
+    away_matches=0.0,
+    away_offsides=0.0,
+    away_offsidesAgainst=0.0,
+    away_oppositionHalfPassesTotalAgainst=0.0,
+    away_ownGoals=0.0,
+    away_ownHalfPassesTotalAgainst=0.0,
+    away_penaltiesCommited=0.0,
+    away_penaltiesTaken=0.0,
+    away_penaltyGoals=0.0,
+    away_penaltyGoalsConceded=0.0,
+    away_possessionLost=0.0,
+    away_redCards=0.0,
+    away_redCardsAgainst=0.0,
+    away_rightFootGoals=0.0,
+    away_saves=0.0,
+    away_shots=0.0,
+    away_shotsAgainst=0.0,
+    away_shotsBlockedAgainst=0.0,
+    away_shotsFromInsideTheBox=0.0,
+    away_shotsFromInsideTheBoxAgainst=0.0,
+    away_shotsFromOutsideTheBox=0.0,
+    away_shotsFromOutsideTheBoxAgainst=0.0,
+    away_shotsOffTarget=0.0,
+    away_shotsOffTargetAgainst=0.0,
+    away_shotsOnTarget=0.0,
+    away_shotsOnTargetAgainst=0.0,
+    away_successfulDribbles=0.0,
+    away_tackles=0.0,
+    away_tacklesAgainst=0.0,
+    away_totalAerialDuels=0.0,
+    away_totalCrosses=0.0,
+    away_totalDuels=0.0,
+    away_totalFinalThirdPassesAgainst=0.0,
+    away_totalGroundDuels=0.0,
+    away_totalLongBalls=0.0,
+    away_totalOppositionHalfPasses=0.0,
+    away_totalOwnHalfPasses=0.0,
+    away_totalPasses=0.0,
+    away_totalPassesAgainst=0.0,
+    away_yellowCards=0.0,
+    away_yellowCardsAgainst=0.0,
+    away_yellowRedCards=0.0, home: Performance = None, away: Performance = None):
+        self.id = id
+        if home is not None:
+            self.home_accurateCrosses = home.accurateCrosses
+            self.home_accurateFinalThirdPassesAgainst = home.accurateFinalThirdPassesAgainst
+            self.home_accurateLongBalls = home.accurateLongBalls
+            self.home_accurateOppositionHalfPasses = home.accurateOppositionHalfPasses
+            self.home_accurateOppositionHalfPassesAgainst = home.accurateOppositionHalfPassesAgainst
+            self.home_accurateOwnHalfPasses = home.accurateOwnHalfPasses
+            self.home_accurateOwnHalfPassesAgainst = home.accurateOwnHalfPassesAgainst
+            self.home_accuratePasses = home.accuratePasses
+            self.home_accuratePassesAgainst = home.accuratePassesAgainst
+            self.home_aerialDuelsWon = home.aerialDuelsWon
+            self.home_assists = home.assists
+            self.home_averageBallPossession = home.averageBallPossession
+            self.home_avgRating = home.avgRating
+            self.home_bigChances = home.bigChances
+            self.home_bigChancesAgainst = home.bigChancesAgainst
+            self.home_bigChancesCreated = home.bigChancesCreated
+            self.home_bigChancesCreatedAgainst = home.bigChancesCreatedAgainst
+            self.home_bigChancesMissed = home.bigChancesMissed
+            self.home_bigChancesMissedAgainst = home.bigChancesMissedAgainst
+            self.home_cleanSheets = home.cleanSheets
+            self.home_clearances = home.clearances
+            self.home_clearancesAgainst = home.clearancesAgainst
+            self.home_clearancesOffLine = home.clearancesOffLine
+            self.home_corners = home.corners
+            self.home_cornersAgainst = home.cornersAgainst
+            self.home_crossesSuccessfulAgainst = home.crossesSuccessfulAgainst
+            self.home_crossesTotalAgainst = home.crossesTotalAgainst
+            self.home_dribbleAttempts = home.dribbleAttempts
+            self.home_dribbleAttemptsTotalAgainst = home.dribbleAttemptsTotalAgainst
+            self.home_dribbleAttemptsWonAgainst = home.dribbleAttemptsWonAgainst
+            self.home_duelsWon = home.duelsWon
+            self.home_errorsLeadingToGoal = home.errorsLeadingToGoal
+            self.home_errorsLeadingToGoalAgainst = home.errorsLeadingToGoalAgainst
+            self.home_errorsLeadingToShot = home.errorsLeadingToShot
+            self.home_errorsLeadingToShotAgainst = home.errorsLeadingToShotAgainst
+            self.home_fastBreakGoals = home.fastBreakGoals
+            self.home_fastBreakShots = home.fastBreakShots
+            self.home_fastBreaks = home.fastBreaks
+            self.home_fouls = home.fouls
+            self.home_freeKickGoals = home.freeKickGoals
+            self.home_freeKickShots = home.freeKickShots
+            self.home_goalsConceded = home.goalsConceded
+            self.home_goalsFromInsideTheBox = home.goalsFromInsideTheBox
+            self.home_goalsFromOutsideTheBox = home.goalsFromOutsideTheBox
+            self.home_goalsScored = home.goalsScored
+            self.home_groundDuelsWon = home.groundDuelsWon
+            self.home_headedGoals = home.headedGoals
+            self.home_hitWoodwork = home.hitWoodwork
+            self.home_hitWoodworkAgainst = home.hitWoodworkAgainst
+            self.home_interceptions = home.interceptions
+            self.home_interceptionsAgainst = home.interceptionsAgainst
+            self.home_keyPassesAgainst = home.keyPassesAgainst
+            self.home_lastManTackles = home.lastManTackles
+            self.home_leftFootGoals = home.leftFootGoals
+            self.home_longBallsSuccessfulAgainst = home.longBallsSuccessfulAgainst
+            self.home_longBallsTotalAgainst = home.longBallsTotalAgainst
+            self.home_matches = home.matches
+            self.home_offsides = home.offsides
+            self.home_offsidesAgainst = home.offsidesAgainst
+            self.home_oppositionHalfPassesTotalAgainst = home.oppositionHalfPassesTotalAgainst
+            self.home_ownGoals = home.ownGoals
+            self.home_ownHalfPassesTotalAgainst = home.ownHalfPassesTotalAgainst
+            self.home_penaltiesCommited = home.penaltiesCommited
+            self.home_penaltiesTaken = home.penaltiesTaken
+            self.home_penaltyGoals = home.penaltyGoals
+            self.home_penaltyGoalsConceded = home.penaltyGoalsConceded
+            self.home_possessionLost = home.possessionLost
+            self.home_redCards = home.redCards
+            self.home_redCardsAgainst = home.redCardsAgainst
+            self.home_rightFootGoals = home.rightFootGoals
+            self.home_saves = home.saves
+            self.home_shots = home.shots
+            self.home_shotsAgainst = home.shotsAgainst
+            self.home_shotsBlockedAgainst = home.shotsBlockedAgainst
+            self.home_shotsFromInsideTheBox = home.shotsFromInsideTheBox
+            self.home_shotsFromInsideTheBoxAgainst = home.shotsFromInsideTheBoxAgainst
+            self.home_shotsFromOutsideTheBox = home.shotsFromOutsideTheBox
+            self.home_shotsFromOutsideTheBoxAgainst = home.shotsFromOutsideTheBoxAgainst
+            self.home_shotsOffTarget = home.shotsOffTarget
+            self.home_shotsOffTargetAgainst = home.shotsOffTargetAgainst
+            self.home_shotsOnTarget = home.shotsOnTarget
+            self.home_shotsOnTargetAgainst = home.shotsOnTargetAgainst
+            self.home_successfulDribbles = home.successfulDribbles
+            self.home_tackles = home.tackles
+            self.home_tacklesAgainst = home.tacklesAgainst
+            self.home_totalAerialDuels = home.totalAerialDuels
+            self.home_totalCrosses = home.totalCrosses
+            self.home_totalDuels = home.totalDuels
+            self.home_totalFinalThirdPassesAgainst = home.totalFinalThirdPassesAgainst
+            self.home_totalGroundDuels = home.totalGroundDuels
+            self.home_totalLongBalls = home.totalLongBalls
+            self.home_totalOppositionHalfPasses = home.totalOppositionHalfPasses
+            self.home_totalOwnHalfPasses = home.totalOwnHalfPasses
+            self.home_totalPasses = home.totalPasses
+            self.home_totalPassesAgainst = home.totalPassesAgainst
+            self.home_yellowCards = home.yellowCards
+            self.home_yellowCardsAgainst = home.yellowCardsAgainst
+            self.home_yellowRedCards = home.yellowRedCards
+        if away is not None:
+            self.away_accurateCrosses = away.accurateCrosses
+            self.away_accurateFinalThirdPassesAgainst = away.accurateFinalThirdPassesAgainst
+            self.away_accurateLongBalls = away.accurateLongBalls
+            self.away_accurateOppositionHalfPasses = away.accurateOppositionHalfPasses
+            self.away_accurateOppositionHalfPassesAgainst = away.accurateOppositionHalfPassesAgainst
+            self.away_accurateOwnHalfPasses = away.accurateOwnHalfPasses
+            self.away_accurateOwnHalfPassesAgainst = away.accurateOwnHalfPassesAgainst
+            self.away_accuratePasses = away.accuratePasses
+            self.away_accuratePassesAgainst = away.accuratePassesAgainst
+            self.away_aerialDuelsWon = away.aerialDuelsWon
+            self.away_assists = away.assists
+            self.away_averageBallPossession = away.averageBallPossession
+            self.away_avgRating = away.avgRating
+            self.away_bigChances = away.bigChances
+            self.away_bigChancesAgainst = away.bigChancesAgainst
+            self.away_bigChancesCreated = away.bigChancesCreated
+            self.away_bigChancesCreatedAgainst = away.bigChancesCreatedAgainst
+            self.away_bigChancesMissed = away.bigChancesMissed
+            self.away_bigChancesMissedAgainst = away.bigChancesMissedAgainst
+            self.away_cleanSheets = away.cleanSheets
+            self.away_clearances = away.clearances
+            self.away_clearancesAgainst = away.clearancesAgainst
+            self.away_clearancesOffLine = away.clearancesOffLine
+            self.away_corners = away.corners
+            self.away_cornersAgainst = away.cornersAgainst
+            self.away_crossesSuccessfulAgainst = away.crossesSuccessfulAgainst
+            self.away_crossesTotalAgainst = away.crossesTotalAgainst
+            self.away_dribbleAttempts = away.dribbleAttempts
+            self.away_dribbleAttemptsTotalAgainst = away.dribbleAttemptsTotalAgainst
+            self.away_dribbleAttemptsWonAgainst = away.dribbleAttemptsWonAgainst
+            self.away_duelsWon = away.duelsWon
+            self.away_errorsLeadingToGoal = away.errorsLeadingToGoal
+            self.away_errorsLeadingToGoalAgainst = away.errorsLeadingToGoalAgainst
+            self.away_errorsLeadingToShot = away.errorsLeadingToShot
+            self.away_errorsLeadingToShotAgainst = away.errorsLeadingToShotAgainst
+            self.away_fastBreakGoals = away.fastBreakGoals
+            self.away_fastBreakShots = away.fastBreakShots
+            self.away_fastBreaks = away.fastBreaks
+            self.away_fouls = away.fouls
+            self.away_freeKickGoals = away.freeKickGoals
+            self.away_freeKickShots = away.freeKickShots
+            self.away_goalsConceded = away.goalsConceded
+            self.away_goalsFromInsideTheBox = away.goalsFromInsideTheBox
+            self.away_goalsFromOutsideTheBox = away.goalsFromOutsideTheBox
+            self.away_goalsScored = away.goalsScored
+            self.away_groundDuelsWon = away.groundDuelsWon
+            self.away_headedGoals = away.headedGoals
+            self.away_hitWoodwork = away.hitWoodwork
+            self.away_hitWoodworkAgainst = away.hitWoodworkAgainst
+            self.away_interceptions = away.interceptions
+            self.away_interceptionsAgainst = away.interceptionsAgainst
+            self.away_keyPassesAgainst = away.keyPassesAgainst
+            self.away_lastManTackles = away.lastManTackles
+            self.away_leftFootGoals = away.leftFootGoals
+            self.away_longBallsSuccessfulAgainst = away.longBallsSuccessfulAgainst
+            self.away_longBallsTotalAgainst = away.longBallsTotalAgainst
+            self.away_matches = away.matches
+            self.away_offsides = away.offsides
+            self.away_offsidesAgainst = away.offsidesAgainst
+            self.away_oppositionHalfPassesTotalAgainst = away.oppositionHalfPassesTotalAgainst
+            self.away_ownGoals = away.ownGoals
+            self.away_ownHalfPassesTotalAgainst = away.ownHalfPassesTotalAgainst
+            self.away_penaltiesCommited = away.penaltiesCommited
+            self.away_penaltiesTaken = away.penaltiesTaken
+            self.away_penaltyGoals = away.penaltyGoals
+            self.away_penaltyGoalsConceded = away.penaltyGoalsConceded
+            self.away_possessionLost = away.possessionLost
+            self.away_redCards = away.redCards
+            self.away_redCardsAgainst = away.redCardsAgainst
+            self.away_rightFootGoals = away.rightFootGoals
+            self.away_saves = away.saves
+            self.away_shots = away.shots
+            self.away_shotsAgainst = away.shotsAgainst
+            self.away_shotsBlockedAgainst = away.shotsBlockedAgainst
+            self.away_shotsFromInsideTheBox = away.shotsFromInsideTheBox
+            self.away_shotsFromInsideTheBoxAgainst = away.shotsFromInsideTheBoxAgainst
+            self.away_shotsFromOutsideTheBox = away.shotsFromOutsideTheBox
+            self.away_shotsFromOutsideTheBoxAgainst = away.shotsFromOutsideTheBoxAgainst
+            self.away_shotsOffTarget = away.shotsOffTarget
+            self.away_shotsOffTargetAgainst = away.shotsOffTargetAgainst
+            self.away_shotsOnTarget = away.shotsOnTarget
+            self.away_shotsOnTargetAgainst = away.shotsOnTargetAgainst
+            self.away_successfulDribbles = away.successfulDribbles
+            self.away_tackles = away.tackles
+            self.away_tacklesAgainst = away.tacklesAgainst
+            self.away_totalAerialDuels = away.totalAerialDuels
+            self.away_totalCrosses = away.totalCrosses
+            self.away_totalDuels = away.totalDuels
+            self.away_totalFinalThirdPassesAgainst = away.totalFinalThirdPassesAgainst
+            self.away_totalGroundDuels = away.totalGroundDuels
+            self.away_totalLongBalls = away.totalLongBalls
+            self.away_totalOppositionHalfPasses = away.totalOppositionHalfPasses
+            self.away_totalOwnHalfPasses = away.totalOwnHalfPasses
+            self.away_totalPasses = away.totalPasses
+            self.away_totalPassesAgainst = away.totalPassesAgainst
+            self.away_yellowCards = away.yellowCards
+            self.away_yellowCardsAgainst = away.yellowCardsAgainst
+            self.away_yellowRedCards = away.yellowRedCards
+        if home is None and away is None:
+            self.home_accurateCrosses = home_accurateCrosses
+            self.home_accurateFinalThirdPassesAgainst = home_accurateFinalThirdPassesAgainst
+            self.home_accurateLongBalls = home_accurateLongBalls
+            self.home_accurateOppositionHalfPasses = home_accurateOppositionHalfPasses
+            self.home_accurateOppositionHalfPassesAgainst = home_accurateOppositionHalfPassesAgainst
+            self.home_accurateOwnHalfPasses = home_accurateOwnHalfPasses
+            self.home_accurateOwnHalfPassesAgainst = home_accurateOwnHalfPassesAgainst
+            self.home_accuratePasses = home_accuratePasses
+            self.home_accuratePassesAgainst = home_accuratePassesAgainst
+            self.home_aerialDuelsWon = home_aerialDuelsWon
+            self.home_assists = home_assists
+            self.home_averageBallPossession = home_averageBallPossession
+            self.home_avgRating = home_avgRating
+            self.home_bigChances = home_bigChances
+            self.home_bigChancesAgainst = home_bigChancesAgainst
+            self.home_bigChancesCreated = home_bigChancesCreated
+            self.home_bigChancesCreatedAgainst = home_bigChancesCreatedAgainst
+            self.home_bigChancesMissed = home_bigChancesMissed
+            self.home_bigChancesMissedAgainst = home_bigChancesMissedAgainst
+            self.home_cleanSheets = home_cleanSheets
+            self.home_clearances = home_clearances
+            self.home_clearancesAgainst = home_clearancesAgainst
+            self.home_clearancesOffLine = home_clearancesOffLine
+            self.home_corners = home_corners
+            self.home_cornersAgainst = home_cornersAgainst
+            self.home_crossesSuccessfulAgainst = home_crossesSuccessfulAgainst
+            self.home_crossesTotalAgainst = home_crossesTotalAgainst
+            self.home_dribbleAttempts = home_dribbleAttempts
+            self.home_dribbleAttemptsTotalAgainst = home_dribbleAttemptsTotalAgainst
+            self.home_dribbleAttemptsWonAgainst = home_dribbleAttemptsWonAgainst
+            self.home_duelsWon = home_duelsWon
+            self.home_errorsLeadingToGoal = home_errorsLeadingToGoal
+            self.home_errorsLeadingToGoalAgainst = home_errorsLeadingToGoalAgainst
+            self.home_errorsLeadingToShot = home_errorsLeadingToShot
+            self.home_errorsLeadingToShotAgainst = home_errorsLeadingToShotAgainst
+            self.home_fastBreakGoals = home_fastBreakGoals
+            self.home_fastBreakShots = home_fastBreakShots
+            self.home_fastBreaks = home_fastBreaks
+            self.home_fouls = home_fouls
+            self.home_freeKickGoals = home_freeKickGoals
+            self.home_freeKickShots = home_freeKickShots
+            self.home_goalsConceded = home_goalsConceded
+            self.home_goalsFromInsideTheBox = home_goalsFromInsideTheBox
+            self.home_goalsFromOutsideTheBox = home_goalsFromOutsideTheBox
+            self.home_goalsScored = home_goalsScored
+            self.home_groundDuelsWon = home_groundDuelsWon
+            self.home_headedGoals = home_headedGoals
+            self.home_hitWoodwork = home_hitWoodwork
+            self.home_hitWoodworkAgainst = home_hitWoodworkAgainst
+            self.home_interceptions = home_interceptions
+            self.home_interceptionsAgainst = home_interceptionsAgainst
+            self.home_keyPassesAgainst = home_keyPassesAgainst
+            self.home_lastManTackles = home_lastManTackles
+            self.home_leftFootGoals = home_leftFootGoals
+            self.home_longBallsSuccessfulAgainst = home_longBallsSuccessfulAgainst
+            self.home_longBallsTotalAgainst = home_longBallsTotalAgainst
+            self.home_matches = home_matches
+            self.home_offsides = home_offsides
+            self.home_offsidesAgainst = home_offsidesAgainst
+            self.home_oppositionHalfPassesTotalAgainst = home_oppositionHalfPassesTotalAgainst
+            self.home_ownGoals = home_ownGoals
+            self.home_ownHalfPassesTotalAgainst = home_ownHalfPassesTotalAgainst
+            self.home_penaltiesCommited = home_penaltiesCommited
+            self.home_penaltiesTaken = home_penaltiesTaken
+            self.home_penaltyGoals = home_penaltyGoals
+            self.home_penaltyGoalsConceded = home_penaltyGoalsConceded
+            self.home_possessionLost = home_possessionLost
+            self.home_redCards = home_redCards
+            self.home_redCardsAgainst = home_redCardsAgainst
+            self.home_rightFootGoals = home_rightFootGoals
+            self.home_saves = home_saves
+            self.home_shots = home_shots
+            self.home_shotsAgainst = home_shotsAgainst
+            self.home_shotsBlockedAgainst = home_shotsBlockedAgainst
+            self.home_shotsFromInsideTheBox = home_shotsFromInsideTheBox
+            self.home_shotsFromInsideTheBoxAgainst = home_shotsFromInsideTheBoxAgainst
+            self.home_shotsFromOutsideTheBox = home_shotsFromOutsideTheBox
+            self.home_shotsFromOutsideTheBoxAgainst = home_shotsFromOutsideTheBoxAgainst
+            self.home_shotsOffTarget = home_shotsOffTarget
+            self.home_shotsOffTargetAgainst = home_shotsOffTargetAgainst
+            self.home_shotsOnTarget = home_shotsOnTarget
+            self.home_shotsOnTargetAgainst = home_shotsOnTargetAgainst
+            self.home_successfulDribbles = home_successfulDribbles
+            self.home_tackles = home_tackles
+            self.home_tacklesAgainst = home_tacklesAgainst
+            self.home_totalAerialDuels = home_totalAerialDuels
+            self.home_totalCrosses = home_totalCrosses
+            self.home_totalDuels = home_totalDuels
+            self.home_totalFinalThirdPassesAgainst = home_totalFinalThirdPassesAgainst
+            self.home_totalGroundDuels = home_totalGroundDuels
+            self.home_totalLongBalls = home_totalLongBalls
+            self.home_totalOppositionHalfPasses = home_totalOppositionHalfPasses
+            self.home_totalOwnHalfPasses = home_totalOwnHalfPasses
+            self.home_totalPasses = home_totalPasses
+            self.home_totalPassesAgainst = home_totalPassesAgainst
+            self.home_yellowCards = home_yellowCards
+            self.home_yellowCardsAgainst = home_yellowCardsAgainst
+            self.home_yellowRedCards = home_yellowRedCards
+            self.away_accurateCrosses = away_accurateCrosses
+            self.away_accurateFinalThirdPassesAgainst = away_accurateFinalThirdPassesAgainst
+            self.away_accurateLongBalls = away_accurateLongBalls
+            self.away_accurateOppositionHalfPasses = away_accurateOppositionHalfPasses
+            self.away_accurateOppositionHalfPassesAgainst = away_accurateOppositionHalfPassesAgainst
+            self.away_accurateOwnHalfPasses = away_accurateOwnHalfPasses
+            self.away_accurateOwnHalfPassesAgainst = away_accurateOwnHalfPassesAgainst
+            self.away_accuratePasses = away_accuratePasses
+            self.away_accuratePassesAgainst = away_accuratePassesAgainst
+            self.away_aerialDuelsWon = away_aerialDuelsWon
+            self.away_assists = away_assists
+            self.away_averageBallPossession = away_averageBallPossession
+            self.away_avgRating = away_avgRating
+            self.away_bigChances = away_bigChances
+            self.away_bigChancesAgainst = away_bigChancesAgainst
+            self.away_bigChancesCreated = away_bigChancesCreated
+            self.away_bigChancesCreatedAgainst = away_bigChancesCreatedAgainst
+            self.away_bigChancesMissed = away_bigChancesMissed
+            self.away_bigChancesMissedAgainst = away_bigChancesMissedAgainst
+            self.away_cleanSheets = away_cleanSheets
+            self.away_clearances = away_clearances
+            self.away_clearancesAgainst = away_clearancesAgainst
+            self.away_clearancesOffLine = away_clearancesOffLine
+            self.away_corners = away_corners
+            self.away_cornersAgainst = away_cornersAgainst
+            self.away_crossesSuccessfulAgainst = away_crossesSuccessfulAgainst
+            self.away_crossesTotalAgainst = away_crossesTotalAgainst
+            self.away_dribbleAttempts = away_dribbleAttempts
+            self.away_dribbleAttemptsTotalAgainst = away_dribbleAttemptsTotalAgainst
+            self.away_dribbleAttemptsWonAgainst = away_dribbleAttemptsWonAgainst
+            self.away_duelsWon = away_duelsWon
+            self.away_errorsLeadingToGoal = away_errorsLeadingToGoal
+            self.away_errorsLeadingToGoalAgainst = away_errorsLeadingToGoalAgainst
+            self.away_errorsLeadingToShot = away_errorsLeadingToShot
+            self.away_errorsLeadingToShotAgainst = away_errorsLeadingToShotAgainst
+            self.away_fastBreakGoals = away_fastBreakGoals
+            self.away_fastBreakShots = away_fastBreakShots
+            self.away_fastBreaks = away_fastBreaks
+            self.away_fouls = away_fouls
+            self.away_freeKickGoals = away_freeKickGoals
+            self.away_freeKickShots = away_freeKickShots
+            self.away_goalsConceded = away_goalsConceded
+            self.away_goalsFromInsideTheBox = away_goalsFromInsideTheBox
+            self.away_goalsFromOutsideTheBox = away_goalsFromOutsideTheBox
+            self.away_goalsScored = away_goalsScored
+            self.away_groundDuelsWon = away_groundDuelsWon
+            self.away_headedGoals = away_headedGoals
+            self.away_hitWoodwork = away_hitWoodwork
+            self.away_hitWoodworkAgainst = away_hitWoodworkAgainst
+            self.away_interceptions = away_interceptions
+            self.away_interceptionsAgainst = away_interceptionsAgainst
+            self.away_keyPassesAgainst = away_keyPassesAgainst
+            self.away_lastManTackles = away_lastManTackles
+            self.away_leftFootGoals = away_leftFootGoals
+            self.away_longBallsSuccessfulAgainst = away_longBallsSuccessfulAgainst
+            self.away_longBallsTotalAgainst = away_longBallsTotalAgainst
+            self.away_matches = away_matches
+            self.away_offsides = away_offsides
+            self.away_offsidesAgainst = away_offsidesAgainst
+            self.away_oppositionHalfPassesTotalAgainst = away_oppositionHalfPassesTotalAgainst
+            self.away_ownGoals = away_ownGoals
+            self.away_ownHalfPassesTotalAgainst = away_ownHalfPassesTotalAgainst
+            self.away_penaltiesCommited = away_penaltiesCommited
+            self.away_penaltiesTaken = away_penaltiesTaken
+            self.away_penaltyGoals = away_penaltyGoals
+            self.away_penaltyGoalsConceded = away_penaltyGoalsConceded
+            self.away_possessionLost = away_possessionLost
+            self.away_redCards = away_redCards
+            self.away_redCardsAgainst = away_redCardsAgainst
+            self.away_rightFootGoals = away_rightFootGoals
+            self.away_saves = away_saves
+            self.away_shots = away_shots
+            self.away_shotsAgainst = away_shotsAgainst
+            self.away_shotsBlockedAgainst = away_shotsBlockedAgainst
+            self.away_shotsFromInsideTheBox = away_shotsFromInsideTheBox
+            self.away_shotsFromInsideTheBoxAgainst = away_shotsFromInsideTheBoxAgainst
+            self.away_shotsFromOutsideTheBox = away_shotsFromOutsideTheBox
+            self.away_shotsFromOutsideTheBoxAgainst = away_shotsFromOutsideTheBoxAgainst
+            self.away_shotsOffTarget = away_shotsOffTarget
+            self.away_shotsOffTargetAgainst = away_shotsOffTargetAgainst
+            self.away_shotsOnTarget = away_shotsOnTarget
+            self.away_shotsOnTargetAgainst = away_shotsOnTargetAgainst
+            self.away_successfulDribbles = away_successfulDribbles
+            self.away_tackles = away_tackles
+            self.away_tacklesAgainst = away_tacklesAgainst
+            self.away_totalAerialDuels = away_totalAerialDuels
+            self.away_totalCrosses = away_totalCrosses
+            self.away_totalDuels = away_totalDuels
+            self.away_totalFinalThirdPassesAgainst = away_totalFinalThirdPassesAgainst
+            self.away_totalGroundDuels = away_totalGroundDuels
+            self.away_totalLongBalls = away_totalLongBalls
+            self.away_totalOppositionHalfPasses = away_totalOppositionHalfPasses
+            self.away_totalOwnHalfPasses = away_totalOwnHalfPasses
+            self.away_totalPasses = away_totalPasses
+            self.away_totalPassesAgainst = away_totalPassesAgainst
+            self.away_yellowCards = away_yellowCards
+            self.away_yellowCardsAgainst = away_yellowCardsAgainst
+            self.away_yellowRedCards = away_yellowRedCards
+
+    def __eq__(self, other):
+        if type(other) is dict:
+            return self.id == other['id']
+        else:
+            return self.id == other.id
+
+    def __hash__(self):
+        return hash(self.id)

@@ -36,11 +36,11 @@ def update_pre_result():
             # except Exception as err:
             #     print(f'Saltando jogo: {m.home} vs {m.away}...')
             #     print(err)
-    # try:
-    persistence.save_pre_training(lista)
-    # except Exception as err:
-    #     print('Erro ao salvar jogos de pre-treino!!')
-    #     print(err)
+    try:
+        persistence.save_pre_training(lista)
+    except Exception as err:
+        print('Erro ao salvar jogos de pre-treino!!')
+        print(err)
     # else:
     #     print(f'Adicionados {n} novos jogos!!')
 
